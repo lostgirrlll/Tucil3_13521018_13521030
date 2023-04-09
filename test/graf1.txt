@@ -1,0 +1,10 @@
+Pintu Masuk, Bundaran, Pertigaan Depan, Masjid Al Jabbar, GKU1, Rektorat, GOR, Asrama, Water Treatment Plant
+0   175 0   0   0   0   0   0   0
+175 0   166 208 0   0   0   0   0
+0   166 0   0   223 0   0   258 0
+0   208 0   0   383 0   0   0   0
+0   0   223 383 0   125 0   0   0 
+0   0   0   0   125 0   354 0   0
+0   0   0   0   0   354 0   281 0
+0   0   258 0   0   0   281 0   197
+0   0   0   0   0   0   0   197 0
