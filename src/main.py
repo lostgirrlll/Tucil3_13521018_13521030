@@ -1,15 +1,16 @@
 from inputFile import *
 from visualisasi import *
+from aStar import *
 
-node, matrix = inputValid()
-
-printList(node)
-printMatrix(matrix)
+node, point, matrix, matrixDist = inputValid()
+# printList(node)
+# printList(point)
+# printMatrix(matrix)
+# printMatrix(matrixDist)
 createGraph(node, matrix)
-showGraph(createGraph(node, matrix))
 
-node1, point, matrix1 = inputKoordinat()
-printList(node1)
-printMatrix(matrix1)
-createGraph(node1, matrix1)
-showGraph(createGraph(node1, matrix1))
+showGraph(createGraph(node, matrix), arrKoordinat(node, point))
+
+path, dist = aStar(node, matrix, matrixDist)
+printList(path)
+print(dist)

@@ -18,9 +18,7 @@ def createGraph(node, matrix):
 def showGraph(graph, arr):
     listpost = []
     position = nx.spring_layout(graph)
-    print(position)
     position = arr
-    print(position)
     listpost.append(position)
     nx.draw(graph, position, with_labels=True, node_color='green', node_size=300, edge_color='black', width=2, font_size=8)
     labels = nx.get_edge_attributes(graph, 'weight')

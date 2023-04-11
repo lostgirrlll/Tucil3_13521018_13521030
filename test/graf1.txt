@@ -1,4 +1,3 @@
-Pintu Masuk, Bundaran, Pertigaan Depan, Masjid Al Jabbar, GKU1, Rektorat, GOR, Asrama, Water Treatment Plant
 0   175 0   0   0   0   0   0   0
 175 0   166 208 0   0   0   0   0
 0   166 0   0   223 0   0   258 0
@@ -8,3 +7,12 @@ Pintu Masuk, Bundaran, Pertigaan Depan, Masjid Al Jabbar, GKU1, Rektorat, GOR, A
 0   0   0   0   0   354 0   281 0
 0   0   258 0   0   0   281 0   197
 0   0   0   0   0   0   0   197 0
+Pintu Masuk, -6.933273, 107.768342
+Bundaran, -6.931819, 107.768872
+Pertigaan Depan, -6.930354, 107.768526
+Masjid Al Jabbar, -6.932403, 107.770706
+GKU1, -6.929037, 107.770037
+Rektorat, -6.928270, 107.770833
+GOR, -6.925923, 107.768642
+Asrama, -6.928236, 107.767569
+Water Treatment Plant, -6.926668, 107.766774
