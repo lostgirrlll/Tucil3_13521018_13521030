@@ -15,9 +15,15 @@ def createGraph(node, matrix):
     return graph
 
 # menampilkan graph
-def showGraph(graph):
+def showGraph(graph, arr):
+    listpost = []
     position = nx.spring_layout(graph)
+    print(position)
+    position = arr
+    print(position)
+    listpost.append(position)
     nx.draw(graph, position, with_labels=True, node_color='green', node_size=300, edge_color='black', width=2, font_size=8)
     labels = nx.get_edge_attributes(graph, 'weight')
     nx.draw_networkx_edge_labels(graph, position, edge_labels=labels, font_size=8, label_pos=0.5, rotate=False, font_color='red', font_weight='bold')
     plt.show()
+    return listpost
