@@ -49,25 +49,26 @@ if __name__ == "__main__":
     # A*
     art("A*")
     pathA, costA = aStar(node, matrix, matrixDist, start, goal)
-    for i in range(len(pathA)):
-        pathA[i] = node[pathA[i][1]]
-    print("\t Path : ", end="")
-    strpathA = ""
-    for i in range(len(pathA)):
-        if (i == len(pathA) - 1):
-            print(pathA[i])
-        else:
-            strpathA = strpathA + pathA[i] + " -> "
-            print(pathA[i], end=" -> ")
-    print("\t Jarak : ", costA)
-    print("\t Menampilkan Graph...")
+    if (start not in pathA or goal not in pathA):
+        print("\t Tidak ada jalur yang dapat ditempuh.")
+    else:
+        print("\t Path : ", end="")
+        strpathA = ""
+        for i in range(len(pathA)):
+            if (i == len(pathA) - 1):
+                print(pathA[i])
+            else:
+                strpathA = strpathA + pathA[i] + " -> "
+                print(pathA[i], end=" -> ")
+        print("\t Jarak : ", costA)
+        print("\t Menampilkan Graph...")
 
-    cost = []
-    for i in range(len(pathA)):
-        cost.append(matrixDist[node.index(pathA[i])][node.index(goal)])
+        cost = []
+        for i in range(len(pathA)):
+            cost.append(matrixDist[node.index(pathA[i])][node.index(goal)])
 
-    mat = matrixPath(pathA, node, cost)
-    showGraph(createGraph(node, 0, matrix, "initial"), arrKoordinat(node, point), createGraph(node, pathA, mat, "ucs_aStar"), "aStar", strpathA + goal, costA)
+        mat = matrixPath(pathA, node, cost)
+        showGraph(createGraph(node, 0, matrix, "initial"), arrKoordinat(node, point), createGraph(node, pathA, mat, "ucs_aStar"), "aStar", strpathA + goal, costA)
     
     # Menampilkan Maps
     printGraph(node, point, pathUCS, matrix)
