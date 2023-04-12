@@ -25,7 +25,48 @@ if __name__ == "__main__":
         goal = str(input("\t Masukkan titik tujuan : "))
 
     # UCS
-    getUCS(matrix, matrixDist, node, start, goal, point)
+    art("UCS")
+    pathUCS, costUCS = ucs(matrix, start, goal, node)
+    if (start not in pathUCS or goal not in pathUCS):
+        print("\t Tidak ada jalur yang dapat ditempuh.")
+    else:
+        print("\t Path : ", end="")
+        strpath = ""
+        for i in range(len(pathUCS) - 1):
+            strpath = strpath + pathUCS[i] + " -> "
+            print(pathUCS[i], end=" -> ")
+        print(goal)
+        print("\t Jarak : ", costUCS)
+        print("\t Menampilkan Graph...")
+        # membuat cost untuk graph
+        cost = []
+        for i in range(len(pathUCS)):
+            cost.append(matrixDist[node.index(pathUCS[i])][node.index(goal)])
+        # membuat matrix yang menghubungkan path
+        mat = matrixPath(pathUCS, node, cost)
+        showGraph(createGraph(node, 0, matrix, "initial"), arrKoordinat(node, point), createGraph(node, pathUCS, mat, "ucs_aStar"), "ucs", strpath + goal, costUCS)
 
     # A*
-    getAStar(matrix, matrixDist, node, start, goal, point)
+    art("A*")
+    pathA, costA = aStar(node, matrix, matrixDist, start, goal)
+    for i in range(len(pathA)):
+        pathA[i] = node[pathA[i][1]]
+    print("\t Path : ", end="")
+    strpathA = ""
+    for i in range(len(pathA)):
+        if (i == len(pathA) - 1):
+            print(pathA[i])
+        else:
+            strpathA = strpathA + pathA[i] + " -> "
+            print(pathA[i], end=" -> ")
+    print("\t Jarak : ", costA)
+    print("\t Menampilkan Graph...")
+
+    cost = []
+    for i in range(len(pathA)):
+        cost.append(matrixDist[node.index(pathA[i])][node.index(goal)])
+
+    mat = matrixPath(pathA, node, cost)
+    showGraph(createGraph(node, 0, matrix, "initial"), arrKoordinat(node, point), createGraph(node, pathA, mat, "ucs_aStar"), "aStar", strpathA + goal, costA)
+    printGraph(node, point, pathUCS, matrix)
+    printGraph(node, point, pathA, matrix)

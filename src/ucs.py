@@ -1,5 +1,6 @@
 from visualisasi import *
 from inputFile import *
+from apiMap import *
 # sort by a cost value
 def sortByCost(dict):
     sorted_tuples = sorted(dict.items(), key=lambda x:-list(x[1].values())[0], reverse=False)
@@ -32,25 +33,3 @@ def ucs(matrix, start, goal, node):
     cost = list(path[1].values())[0]
     path = (start + list(path[1].keys())[0]).split(',')
     return path, cost
-
-def getUCS(matrix, matrixDist, node, start, goal, point):
-    art("UCS")
-    pathUCS, costUCS = ucs(matrix, start, goal, node)
-    if (start not in pathUCS or goal not in pathUCS):
-        print("\t Tidak ada jalur yang dapat ditempuh.")
-    else:
-        print("\t Path : ", end="")
-        strpath = ""
-        for i in range(len(pathUCS) - 1):
-            strpath = strpath + pathUCS[i] + " -> "
-            print(pathUCS[i], end=" -> ")
-        print(goal)
-        print("\t Jarak : ", costUCS)
-        print("\t Menampilkan Graph...")
-        # membuat cost untuk graph
-        cost = []
-        for i in range(len(pathUCS)):
-            cost.append(matrixDist[node.index(pathUCS[i])][node.index(goal)])
-        # membuat matrix yang menghubungkan path
-        mat = matrixPath(pathUCS, node, cost)
-        showGraph(createGraph(node, 0, matrix, "initial"), arrKoordinat(node, point), createGraph(node, pathUCS, mat, "ucs_aStar"), "ucs", strpath + goal, costUCS)
