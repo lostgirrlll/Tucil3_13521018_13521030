@@ -18,6 +18,8 @@ Program akan mengeluarkan lintasan terpendek dari suatu titik ke titik lain meng
 ## Struktur Program
 ```
 Tucil3_13521018_13521030              
+├─ doc                                
+│  └─ Tucil3_13521018_13521030.pdf    
 ├─ src                                
 │  ├─ __pycache__                     
 │  │  ├─ apiMap.cpython-311.pyc       
@@ -32,12 +34,12 @@ Tucil3_13521018_13521030
 │  ├─ ucs.py                          
 │  └─ visualisasi.py                  
 ├─ test                               
-│  ├─ graf1.txt                       
+│  ├─ graf1.txt                      
 │  ├─ graf2.txt                       
 │  ├─ graf3.txt                       
-│  ├─ graf4.txt                       
-│  └─ graf5.txt                       
-└─ README.md                                 
+│  └─ graf4.txt                       
+└─ README.md                          
+                              
 ```
 
 ## Kebutuhan program dan instalasi

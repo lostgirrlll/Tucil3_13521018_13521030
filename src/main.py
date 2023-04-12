@@ -68,5 +68,7 @@ if __name__ == "__main__":
 
     mat = matrixPath(pathA, node, cost)
     showGraph(createGraph(node, 0, matrix, "initial"), arrKoordinat(node, point), createGraph(node, pathA, mat, "ucs_aStar"), "aStar", strpathA + goal, costA)
+    
+    # Menampilkan Maps
     printGraph(node, point, pathUCS, matrix)
     printGraph(node, point, pathA, matrix)
