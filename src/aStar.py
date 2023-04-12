@@ -2,8 +2,10 @@ from queue import PriorityQueue
 import copy
 
 def aStar(node, matrix, matrixDist, start, goal):
+    # mengubah nama node menjadi index
     start = node.index(start)
     goal = node.index(goal)
+    # mengambil matrix distance yang berisi jarak garis lurus dari simpul goal
     mat = matrixDist[goal]
     queue = PriorityQueue()
     path = []
@@ -21,31 +23,35 @@ def aStar(node, matrix, matrixDist, start, goal):
         gn = matrix[start][temp[1]]
         while not (found):
             child += 1
+            # kondisi jika sudah sampai ke goal
             if (temp[1] == goal):
                 found = True
                 path.append(temp)
                 dist = temp[3]
             else :
-                start = temp[1]
+                # menginisialisasi node yang sedang dikunjungi
+                curr = temp[1]
                 path.append(temp)
                 tempGn = gn
+                # memasukkan node yang belum dikunjungi dan bertetangga dengan curr ke queue
                 for i in range(len(node)):
                     gn = tempGn
-                    if (matrix[start][i] > 0):
-                        gn += matrix[start][i]
+                    if (matrix[curr][i] > 0):
+                        gn += matrix[curr][i]
                         queue.put((gn + mat[i], i, child, gn))
                 temp1 = copy.copy(temp)
                 temp = queue.get()
+                # mengganti node jika sudah pernah dikunjungi
                 for i in range(len(path)):
                     if (temp[1] == path[i][1]):
                         temp = queue.get()
-                gn = temp[3]
                 gn = temp[3]
                 tempChild1 = tempChild.copy()
                 tempPath1 = tempPath.copy()
                 idx = temp[2]
                 if (len(tempChild1) != 0):
                     idx = tempChild[0]
+                # mengecek kondisi backtracking
                 if (temp[2] <= temp1[2] or matrix[temp[1]][temp1[1]] == 0):
                     removeChild = []
                     removePath = []
@@ -68,35 +74,4 @@ def aStar(node, matrix, matrixDist, start, goal):
                         for l in range(len(tempPath1)):
                             path.append(tempPath1[l])
                 listChild.append(temp[2])
-                # print(temp[1])
-                # print("path : ")
-                # print(path)
-                # print("tempPath : ")
-                # print(tempPath)
     return path, dist
-                    
-def nodeValid(node):
-    flag = False
-    while (not flag):
-        start = input("Masukkan titik awal : ")
-        if start in node:
-            flag = True
-        else :
-            print("Titik tidak ditemukan.")
-            flag = False
-    flag = False
-    while (not flag):
-        goal = input("Masukkan titik tujuan : ")
-        if goal in node:
-            flag = True
-        else :
-            print("Titik tidak ditemukan.")
-            flag = False
-    return start, goal
-
-def printPath(node, path):
-    for i in range(len(path)):
-        if (i == len(path) - 1):
-            print(node[path[i][1]])
-        else :
-            print(node[path[i][1]], end=" > ")

@@ -1,7 +1,7 @@
 import os
 import numpy as np
-from scipy.linalg import issymmetric
 
+# Input file validation
 def inputValid():
     flag = False
     while (flag == False):

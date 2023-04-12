@@ -2,7 +2,7 @@ from inputFile import *
 from visualisasi import *
 from aStar import *
 from ucs import *
-from Graph import *
+from apiMap import *
 
 if __name__ == "__main__":
     art("SHORT PATH")
@@ -23,22 +23,22 @@ if __name__ == "__main__":
         start = str(input("\t Masukkan titik awal : "))
         goal = str(input("\t Masukkan titik tujuan : "))
 
-    # art("UCS")
-    # path, cost = ucs(matrix, start, goal, node)
-    # if (start not in path or goal not in path):
-    #     print("\t Tidak ada jalur yang dapat ditempuh.")
-    # else:
-    #     print("\t Path : ", end="")
-    #     strpath = ""
-    #     for i in range(len(path) - 1):
-    #         strpath = strpath + path[i] + " -> "
-    #         print(path[i], end=" -> ")
-    #     print(goal)
-    #     print("\t Jarak : ", sum(cost))
-    #     print("\t Menampilkan Graph...")
-    #     mat = matrixPath(path, node, cost)
-    #     # print(matrixPath(path, node, cost))
-    #     showGraph(createGraph(node, 0, matrix, "initial"), arrKoordinat(node, point), createGraph(node, path, mat, "ucs_aStar"), "ucs", strpath + goal, sum(cost))
+    art("UCS")
+    path, cost = ucs(matrix, start, goal, node)
+    if (start not in path or goal not in path):
+        print("\t Tidak ada jalur yang dapat ditempuh.")
+    else:
+        print("\t Path : ", end="")
+        strpath = ""
+        for i in range(len(path) - 1):
+            strpath = strpath + path[i] + " -> "
+            print(path[i], end=" -> ")
+        print(goal)
+        print("\t Jarak : ", sum(cost))
+        print("\t Menampilkan Graph...")
+        mat = matrixPath(path, node, cost)
+        # print(matrixPath(path, node, cost))
+        showGraph(createGraph(node, 0, matrix, "initial"), arrKoordinat(node, point), createGraph(node, path, mat, "ucs_aStar"), "ucs", strpath + goal, sum(cost))
 
     art("A*")
     pathA, costA = aStar(node, matrix, matrixDist, start, goal)
@@ -55,6 +55,11 @@ if __name__ == "__main__":
             print(pathA[i], end=" -> ")
     print("\t Jarak : ", costA)
     print("\t Menampilkan Graph...")
-    # mat = matrixPath(pathA, node, cost)
-    # showGraph(createGraph(node, 0, matrix, "initial"), arrKoordinat(node, point), createGraph(node, pathA, mat, "ucs_aStar"), "aStar", strpathA + goal, costA)
+
+    cost = []
+    for i in range(len(pathA)):
+        cost.append(matrixDist[node.index(pathA[i])][node.index(goal)])
+
+    mat = matrixPath(pathA, node, cost)
+    showGraph(createGraph(node, 0, matrix, "initial"), arrKoordinat(node, point), createGraph(node, pathA, mat, "ucs_aStar"), "aStar", strpathA + goal, costA)
     printGraph(node, point, pathA, matrix)
