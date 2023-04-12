@@ -1,49 +1,44 @@
+# sor by a cost value
 def sortByCost(dict):
-    # Sort dictionary by value in descending order to dictionary
-    desc = {}
-    for key, value in sorted(dict.items(), key=lambda item: item[1], reverse=True):
-        desc[key] = value
-    return desc
-
-def deletePath(path, goal):
-    tempPath = []
-    tempPath.append(goal)
-    for i in range(len(path)):
-        if goal == list(path.keys())[i]:
-            current = list(path.values())[i]
-            tempPath.append(current)
-            while (current != list(path.keys())[0]):
-                for j in range(len(path)):
-                    if current == list(path.keys())[j]:
-                        current = list(path.values())[j]
-                        tempPath.append(current)
-    tempPath.reverse()
-    return tempPath
+    sorted_tuples = sorted(dict.items(), key=lambda x:-list(x[1].values())[0], reverse=False)
+    sorted_dict = {t[0]:t[1] for t in sorted_tuples}
+    return sorted_dict
 
 def ucs(matrix, start, goal, node):
+    visited = []
     queue = {}
-    path = {}
-    cost = {}
-    queue.update({start: -1})
-    path[start] = [-1]
-    cost[-1] = -1
+    path = []
+    # currPath = []
+    queue.update({(0, start) : {'': 0}})
+    path.append(start)
+    visited.append(start)
+    j = 0
     while queue:
         queue = sortByCost(queue)
-        current = queue.popitem()
-        currentPoint = current[0]
-        currentCost = current[1]
-        # print("sedang dicek : ",currentPoint)
+        # print("Sort by cost : ", queue)
+        path = queue.popitem()
+        # print("path :", path)
+        currNode = path[0][1]
+        visited.append(currNode)
+        # print("visited :", visited)
+        # print("dikunjungi :", currNode)
+        currPath = list(path[1].keys())[0]
+        # print("currpath :", currPath)
+        currCost = list(path[1].values())[0]
+        # print("currcost :", currCost)
+    # queue = {node: {[path] : cost}}
         for i in range(len(matrix)):
-            if matrix[node.index(currentPoint)][i] != 0:
-                if node[i] not in path:
-                    queue.update({node[i]: matrix[node.index(currentPoint)][i]})
-                    # print("dimasukkan ke antrian untuk dicek :", queue)
-                    path.update({node[i]: currentPoint})
-                    # print("dimasukkan ke path :", path)
-                    cost.update({matrix[node.index(currentPoint)][i] : currentCost})
-        if currentPoint == goal:
+            if matrix[node.index(currNode)][i] != 0:
+                if node[i] not in visited:
+                    # print("dimasukkan ke queue :", node[i])
+                    # visited.append(node[i])
+                    # print("visited :", visited)
+                    queue.update({(j, node[i]) : {currPath + "," + node[i] : currCost + matrix[node.index(currNode)][i]}})
+                    # print("queue :", queue)
+        j += 1
+        # print("----------------------------------------------------------------")
+        if currNode == goal:
             break
-    path = deletePath(path, goal)
-    cost = deletePath(cost, currentCost)
-    cost.remove(cost[0])
+    cost = list(path[1].values())[0]
+    path = (start + list(path[1].keys())[0]).split(',')
     return path, cost
