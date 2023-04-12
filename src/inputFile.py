@@ -50,7 +50,7 @@ def inputValid():
                             if not isSymmetric(matrix, len(matrix)):
                                 print("Matriks tidak simetris.")
                                 flag = False
-                                break
+                                continue
                             else :
                                 print("Input file valid.")
                                 # Convert line to list of node and list of coordinates
