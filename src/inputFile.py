@@ -5,11 +5,11 @@ from scipy.linalg import issymmetric
 def inputValid():
     flag = False
     while (flag == False):
-        filename = input("Masukkan nama file : ")
+        filename = input("\t Masukkan nama file : ")
         filepath = os.path.join('..\\Tucil3_13521018_13521030\\test', filename)        
         # Check if file exists
         if not os.path.isfile(filepath):
-            print("File tidak ditemukan.")
+            print("\t File tidak ditemukan.")
             flag = False
         else :
             # Read file
@@ -21,11 +21,11 @@ def inputValid():
                 length = len(row)
                 # Check if file has minimum 8 nodes
                 if length < 8:
-                    print("Input file minimum memiliki 8 node.")
+                    print("\t Input file minimum memiliki 8 node.")
                     flag = False
                 else :
                     if any(value < 0 for value in row):
-                        print("Nilai matriks tidak boleh negatif.")
+                        print("\t Nilai matriks tidak boleh negatif.")
                         flag = False
                         break
                     else :
@@ -37,7 +37,7 @@ def inputValid():
                             row = [int(value) for value in row]
                             # Check if matrix has negative value
                             if any(value < 0 for value in row):
-                                print("Nilai matriks tidak boleh negatif.")
+                                print("\t Nilai matriks tidak boleh negatif.")
                                 flag = False
                                 break
                             else :
@@ -48,11 +48,11 @@ def inputValid():
                         if (flag == True):
                             matrix = np.array(matrix)
                             if not isSymmetric(matrix, len(matrix)):
-                                print("Matriks tidak simetris.")
+                                print("\t Matriks tidak simetris.")
                                 flag = False
                                 break
                             else :
-                                print("Input file valid.")
+                                print("\t Input file valid.")
                                 # Convert line to list of node and list of coordinates
                                 node = []
                                 point = []
@@ -77,7 +77,6 @@ def inputValid():
                 matrix[i][j] = matrixDist[i][j]
     return node, point, matrix, matrixDist
 
-
 # Check if matrix is symmetric
 def isSymmetric(mat, N):
     for i in range(N):
@@ -98,9 +97,18 @@ def printMatrix(matrix):
             print(matrix[i][j], end=' ')
         print()
 
+# get node : point dictionary
 def arrKoordinat(node, point):
     arr = {}
     length = len(node)
     for i in range(length):
         arr[node[i]] = point[i]
     return arr
+
+# matrix of path
+def matrixPath(path, node, cost):
+    mat = [[0 for i in range(len(node))] for j in range(len(node))]
+    for i in range(len(path)-1):
+        mat[node.index(path[i])][node.index(path[i+1])] = cost[i]
+        mat[node.index(path[i+1])][node.index(path[i])] = cost[i]
+    return mat
