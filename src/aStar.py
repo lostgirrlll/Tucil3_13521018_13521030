@@ -88,7 +88,6 @@ def getAStar(matrix, matrixDist, node, start, goal, point):
     strpathA = ""
     for i in range(len(pathA)):
         if (i == len(pathA) - 1):
-            strpathA = strpathA + pathA[i]
             print(pathA[i])
         else:
             strpathA = strpathA + pathA[i] + " -> "
