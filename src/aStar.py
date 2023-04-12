@@ -1,5 +1,8 @@
 from queue import PriorityQueue
 import copy
+from visualisasi import *
+from inputFile import *
+from apiMap import *
 
 def aStar(node, matrix, matrixDist, start, goal):
     # mengubah nama node menjadi index
@@ -75,3 +78,28 @@ def aStar(node, matrix, matrixDist, start, goal):
                             path.append(tempPath1[l])
                 listChild.append(temp[2])
     return path, dist
+
+def getAStar(matrix, matrixDist, node, start, goal, point):
+    art("A*")
+    pathA, costA = aStar(node, matrix, matrixDist, start, goal)
+    for i in range(len(pathA)):
+        pathA[i] = node[pathA[i][1]]
+    print("\t Path : ", end="")
+    strpathA = ""
+    for i in range(len(pathA)):
+        if (i == len(pathA) - 1):
+            strpathA = strpathA + pathA[i]
+            print(pathA[i])
+        else:
+            strpathA = strpathA + pathA[i] + " -> "
+            print(pathA[i], end=" -> ")
+    print("\t Jarak : ", costA)
+    print("\t Menampilkan Graph...")
+
+    cost = []
+    for i in range(len(pathA)):
+        cost.append(matrixDist[node.index(pathA[i])][node.index(goal)])
+
+    mat = matrixPath(pathA, node, cost)
+    showGraph(createGraph(node, 0, matrix, "initial"), arrKoordinat(node, point), createGraph(node, pathA, mat, "ucs_aStar"), "aStar", strpathA + goal, costA)
+    printGraph(node, point, pathA, matrix)
